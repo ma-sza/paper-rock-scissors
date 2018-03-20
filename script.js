@@ -29,7 +29,7 @@ pickScissors.addEventListener('click', function() {
 // Game state
 var gameState = "notStarted",
   player = {
-    name: " ",
+    name: "",
     score: 0
   },
   computer = {
@@ -56,8 +56,11 @@ function setGameElements() {
 }
 
 // Starts new game
+// Starts new game
 function newGame() {
-  player.name = prompt('Please enter your name', 'imię gracza');
+  if (player.name === "") {
+    player.name = prompt('Please enter your name', 'imię gracza');
+  }
 
   if (player.name) {
     playerNameElem.innerHTML = player.name;
@@ -68,7 +71,6 @@ function newGame() {
     setGamePoints();
   }
 }
-
 // Gets computer pick
 function getComputerPick() {
   return possiblePicks[Math.floor(Math.random() * 3)];
@@ -128,10 +130,12 @@ function whoWins() {
     gameState = 'ended';
     newGameElem.style.display = 'block';
     newGameBtn.innerText = 'Jeszcze raz';
+    pickElem.style.display = 'none';
   } else if (player.score === 10) {
     winner.innerHTML = 'Congratulations! You won!';
     gameState = 'ended';
     newGameElem.style.display = 'block';
     newGameBtn.innerText = 'Jeszcze raz';
+    pickElem.style.display = 'none';
   }
 };
